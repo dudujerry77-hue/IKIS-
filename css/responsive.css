@@ -1,0 +1,78 @@
+/* ==========================================================================
+   responsive.css — breakpoint adjustments layered on top of style.css
+   ========================================================================== */
+
+/* ---------- Tablets & below (≤ 1024px) ---------- */
+@media (max-width: 1024px) {
+  .cart-layout { grid-template-columns: 1fr; }
+  .cart-summary { position: static; }
+  .hero-visual { width: 240px; height: 240px; }
+  .hero-plate { width: 170px; height: 170px; font-size: 4.6rem; }
+}
+
+/* ---------- Small tablets (≤ 860px) ---------- */
+@media (max-width: 860px) {
+  .search-box { min-width: 160px; }
+  .hero-inner { flex-direction: column; text-align: center; padding: 50px 20px; }
+  .hero-text { max-width: 100%; }
+  .hero-actions, .hero-stats { justify-content: center; }
+  .hero-visual { margin-top: 10px; }
+}
+
+/* ---------- Mobile (≤ 700px) ---------- */
+@media (max-width: 700px) {
+  :root { --header-h: 64px; }
+
+  .nav-desktop { display: none; }
+  .search-box { display: none; }
+  .icon-btn { display: flex; }
+  .profile-chip { width: 36px; height: 36px; font-size: 0.95rem; }
+  .brand-sub { display: none; }
+  .brand-name { font-size: 0.86rem; }
+  .brand-icon { font-size: 1.5rem; }
+  .header-inner { padding: 0 16px; }
+  .container { padding: 0 16px; }
+
+  .bottom-nav { display: flex; }
+  main { padding-bottom: var(--bottom-nav-h); }
+  .view { padding-bottom: calc(var(--bottom-nav-h) + 30px); }
+
+  .hero { padding: 0; }
+  .hero-inner { padding: 40px 18px; gap: 24px; }
+  .hero-text h1 { font-size: 1.7rem; }
+  .hero-text p { font-size: 0.92rem; }
+  .hero-stats { gap: 20px; flex-wrap: wrap; }
+  .hero-visual { width: 190px; height: 190px; }
+  .hero-plate { width: 140px; height: 140px; font-size: 3.6rem; }
+  .hero-orbit { width: 42px; height: 42px; font-size: 1.4rem; }
+
+  .section { padding: 34px 0; }
+  .section-title { font-size: 1.25rem; }
+
+  .food-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px; }
+  .food-media { height: 110px; font-size: 2.6rem; }
+  .food-body { padding: 12px; gap: 4px; }
+  .food-name { font-size: 0.88rem; }
+  .food-desc { font-size: 0.74rem; -webkit-line-clamp: 2; display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; }
+  .food-price { font-size: 0.92rem; }
+  .add-cart-btn { padding: 9px; }
+  .add-cart-btn span { display: none; }
+
+  .cart-item { flex-wrap: wrap; }
+  .cart-item-subtotal { min-width: auto; }
+
+  .modal { padding: 22px; }
+
+  .toast-container { left: 16px; right: 16px; bottom: calc(var(--bottom-nav-h) + 14px); align-items: center; }
+  .toast { width: 100%; justify-content: center; text-align: center; }
+}
+
+/* ---------- Very small phones (≤ 380px) ---------- */
+@media (max-width: 380px) {
+  .food-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
+  .hero-stats { gap: 14px; }
+  .hero-stats strong { font-size: 1.05rem; }
+}
+
+/* Guard against any accidental horizontal overflow */
+html, body { max-width: 100%; }

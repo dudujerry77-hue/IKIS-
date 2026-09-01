@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard — Iya Kudinka Iya Shagalinka Restaurants</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='10' fill='%231b4332'/%3E%3Cpath d='M8 23a16 16 0 0 0 32 0z' fill='%23e2711d'/%3E%3Cpath d='M6 23h36' stroke='%23fff8f0' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="admin-body">
+
+<!-- ============================= LOGIN SCREEN ============================= -->
+<div class="admin-login-screen" id="loginScreen">
+  <form class="admin-login-card" id="loginForm">
+    <div class="admin-login-logo">
+      <svg viewBox="0 0 48 48"><path d="M8 23a16 16 0 0 0 32 0z" fill="currentColor"/><path d="M6 23h36" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M15 23c0-3 2.2-5 2.2-8s-2.2-4-2.2-6M24 23c0-3 2.2-5 2.2-8s-2.2-4-2.2-6M33 23c0-3 2.2-5 2.2-8s-2.2-4-2.2-6" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg>
+    </div>
+    <h1>Admin Sign In</h1>
+    <p class="admin-login-sub">Iya Kudinka Iya Shagalinka Restaurants — Staff Dashboard</p>
+
+    <label class="field">
+      <span>Username or Email</span>
+      <input type="text" name="username" id="loginUsername" required autocomplete="username" placeholder="admin">
+    </label>
+    <label class="field">
+      <span>Password</span>
+      <input type="password" name="password" id="loginPassword" required autocomplete="current-password" placeholder="••••••••">
+    </label>
+
+    <p class="login-error" id="loginError" hidden></p>
+
+    <button type="submit" class="btn btn-primary btn-block">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      Sign In
+    </button>
+
+    <p class="admin-login-hint">Demo credentials: <strong>admin</strong> / <strong>admin123</strong></p>
+    <p class="admin-login-disclaimer">
+      This first version authenticates entirely in the browser (localStorage) — it is a demo
+      convenience only, not real security. A production deployment must replace this with a
+      real server-side login.
+    </p>
+    <a class="back-to-site" href="index.html">← Back to the main site</a>
+  </form>
+</div>
+
+<!-- ============================= DASHBOARD ============================= -->
+<div class="admin-shell" id="adminShell" hidden>
+
+  <aside class="admin-sidebar">
+    <div class="admin-brand">
+      <svg viewBox="0 0 48 48"><path d="M8 23a16 16 0 0 0 32 0z" fill="currentColor"/><path d="M6 23h36" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M15 23c0-3 2.2-5 2.2-8s-2.2-4-2.2-6M24 23c0-3 2.2-5 2.2-8s-2.2-4-2.2-6M33 23c0-3 2.2-5 2.2-8s-2.2-4-2.2-6" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg>
+      <span>IKIS Admin</span>
+    </div>
+    <nav class="admin-nav">
+      <button class="admin-nav-link active" data-panel="overview" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+        Overview
+      </button>
+      <button class="admin-nav-link" data-panel="foods" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h0a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3z"/><path d="M21 15v7"/></svg>
+        Food Management
+      </button>
+      <button class="admin-nav-link" data-panel="orders" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        Orders
+      </button>
+    </nav>
+    <div class="admin-sidebar-foot">
+      <span class="admin-session-user" id="sessionUserLabel"></span>
+      <button class="admin-logout-btn" id="logoutBtn" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Log Out
+      </button>
+    </div>
+  </aside>
+
+  <header class="admin-topbar">
+    <button class="admin-mobile-menu" id="mobileMenuBtn" type="button" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <h1 id="panelTitle">Overview</h1>
+    <a class="admin-view-site" href="index.html" target="_blank" rel="noopener">View Site ↗</a>
+  </header>
+
+  <main class="admin-main">
+
+    <!-- OVERVIEW PANEL -->
+    <section class="admin-panel" data-panel="overview">
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-icon stat-icon-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+          <div><span class="stat-value" id="statTotalOrders">0</span><span class="stat-label">Total Orders</span></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon stat-icon-amber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <div><span class="stat-value" id="statPendingOrders">0</span><span class="stat-label">Pending Orders</span></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon stat-icon-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+          <div><span class="stat-value" id="statCompletedOrders">0</span><span class="stat-label">Completed Orders</span></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon stat-icon-orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h0a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3z"/><path d="M21 15v7"/></svg></div>
+          <div><span class="stat-value" id="statTotalFoods">0</span><span class="stat-label">Total Food Items</span></div>
+        </div>
+      </div>
+
+      <div class="admin-card">
+        <div class="admin-card-head"><h2>Recent Orders</h2></div>
+        <div class="table-wrap">
+          <table class="admin-table" id="recentOrdersTable">
+            <thead><tr><th>Order ID</th><th>Customer</th><th>Date</th><th>Total</th><th>Status</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <p class="admin-empty" id="recentOrdersEmpty" hidden>No orders yet.</p>
+      </div>
+    </section>
+
+    <!-- FOOD MANAGEMENT PANEL -->
+    <section class="admin-panel" data-panel="foods" hidden>
+      <div class="admin-card">
+        <div class="admin-card-head">
+          <h2>Food Management</h2>
+          <button class="btn btn-primary btn-sm" id="addFoodBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Add Food
+          </button>
+        </div>
+        <div class="table-wrap">
+          <table class="admin-table" id="foodsTable">
+            <thead><tr><th></th><th>Name</th><th>Category</th><th>Price</th><th>Status</th><th></th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ORDERS PANEL -->
+    <section class="admin-panel" data-panel="orders" hidden>
+      <div class="admin-card">
+        <div class="admin-card-head"><h2>All Orders</h2></div>
+        <div class="table-wrap">
+          <table class="admin-table" id="allOrdersTable">
+            <thead><tr><th>Order ID</th><th>Customer</th><th>Items</th><th>Date</th><th>Total</th><th>Status</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <p class="admin-empty" id="allOrdersEmpty" hidden>No orders yet.</p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ============================= FOOD FORM MODAL ============================= -->
+<div class="modal-overlay" id="foodModal" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="foodModalTitle">
+    <button class="modal-close" id="closeFoodModal" type="button" aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <h2 id="foodModalTitle">Add Food</h2>
+    <form id="foodForm">
+      <input type="hidden" name="id">
+      <label class="field">
+        <span>Food Name</span>
+        <input type="text" name="name" required placeholder="e.g. Jollof Rice">
+      </label>
+      <label class="field">
+        <span>Description</span>
+        <textarea name="description" required placeholder="Short, appetising description"></textarea>
+      </label>
+      <div class="field-row">
+        <label class="field">
+          <span>Price (₦)</span>
+          <input type="number" name="price" min="0" step="1" required placeholder="2500">
+        </label>
+        <label class="field">
+          <span>Category</span>
+          <select name="category" id="foodCategorySelect" required></select>
+        </label>
+      </div>
+      <label class="field">
+        <span>Image URL</span>
+        <input type="url" name="image" placeholder="https://…">
+      </label>
+      <div class="field-row">
+        <label class="field checkbox-field">
+          <input type="checkbox" name="popular">
+          <span>Mark as Popular</span>
+        </label>
+        <label class="field checkbox-field">
+          <input type="checkbox" name="available" checked>
+          <span>Available</span>
+        </label>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">Save Food</button>
+    </form>
+  </div>
+</div>
+
+<!-- ============================= ORDER DETAIL MODAL ============================= -->
+<div class="modal-overlay" id="orderDetailModal" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="orderDetailTitle">
+    <button class="modal-close" id="closeOrderDetail" type="button" aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <h2 id="orderDetailTitle">Order Details</h2>
+    <div id="orderDetailBody"></div>
+  </div>
+</div>
+
+<div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+<script src="js/data.js"></script>
+<script src="js/icons.js"></script>
+<script src="js/orders.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>
